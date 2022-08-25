@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -11,8 +10,14 @@ import entities.Student;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class SimplePresentationScreen extends JFrame {
@@ -37,7 +42,7 @@ public class SimplePresentationScreen extends JFrame {
 		
 		setTitle("TdP-DCIC-UNS 2021 :: Pantalla de presentación");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(674, 303));
+		setSize(new Dimension(674, 325));
 		setResizable(false);
 		setContentPane(contentPane);
 		
@@ -58,6 +63,9 @@ public class SimplePresentationScreen extends JFrame {
 		labelLU.setFont(new Font("Tahoma", Font.BOLD, 12));
 		labelLU.setBounds(10, 22, 67, 25);
 		tabInformation.add(labelLU);
+		
+		
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(SimplePresentationScreen.class.getResource("/images/tdp.png")));
 		
 		textFieldLU = new JTextField(studentData.getId()+ "");
 		textFieldLU.setBounds(100, 26, 315, 19);
@@ -109,5 +117,29 @@ public class SimplePresentationScreen extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(SimplePresentationScreen.class.getResource("/images/WIN_20220825_11_16_11_Pro (4).jpg")));
 		lblNewLabel.setBounds(445, 32, 250, 224);
 		contentPane.add(lblNewLabel);
+		
+		JLabel labelFechayHora = new JLabel("Esta ventana fue generada el " + fechaActual() + " a las " + horaActual());
+		labelFechayHora.setFont(new Font("Tahoma", Font.ITALIC, 12));
+		labelFechayHora.setBounds(15, 255, 390, 13);
+		contentPane.add(labelFechayHora);
+		
+		
+	}
+	
+	private String horaActual() {
+		LocalTime hora= LocalTime.now();
+		
+		DateTimeFormatter formatoFechayHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+	   return hora.format(formatoFechayHora);
+	}
+	
+	
+	private String fechaActual() {
+		LocalDate fecha= LocalDate.now();
+		
+		DateTimeFormatter formatoFechayHora = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+	    return fecha.format(formatoFechayHora);
 	}
 }
